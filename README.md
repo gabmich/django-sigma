@@ -19,15 +19,19 @@ source env/bin/activate
 ```
 pip install -r requirements.txt
 ```
-5. Change directory to reach Django root dir :
+5. Change directory to reach Django project root dir :
 ```
 cd django_sigma
 ```
-6. Run Django migrations :
+6. Run Django migrations (if you don't modifiy 'settings.py', it will create a sqlite db) :
 ```
 ./manage.py migrate
 ```
-7. Run dev web server :
+7. Created a 'media' directory where you can put your data files (csv, xls, ods) (note : MEDIA_ROOT settings point to this folder)
+```
+mkdir media
+```
+8. Run dev web server :
 ```
 ./manage.py runserver
 ```
