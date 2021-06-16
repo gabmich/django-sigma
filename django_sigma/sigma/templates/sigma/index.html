@@ -1,0 +1,52 @@
+{% extends 'layouts/master.html' %}
+
+{% block 'content' %}
+<h1>Sigma graph</h1>
+
+<!-- END SIGMA IMPORTS -->
+<div id="container">
+  <style>
+    #graph-container {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+    }
+  </style>
+  <div id="graph-container"></div>
+</div>
+{% endblock %}
+
+{% block 'js' %}
+<script>
+/**
+ * This is a basic example on how to instantiate sigma. A random graph is
+ * generated and stored in the "graph" variable, and then sigma is instantiated
+ * directly with the graph.
+ *
+ * The simple instance of sigma is enough to make it render the graph on the on
+ * the screen, since the graph is given directly to the constructor.
+ */
+let graph = {
+      nodes: [],
+      edges: []
+    };
+
+graph.nodes = JSON.parse("{{nodes | escapejs }}");
+graph.edges = JSON.parse("{{edges | escapejs }}");
+// Instantiate sigma:
+
+s = new sigma({
+  graph: graph,
+  // container: 'graph-container',
+  renderer: {
+    // IMPORTANT:
+    // This works only with the canvas renderer, so the
+    // renderer type set as "canvas" is necessary here.
+    container: 'graph-container',
+    type: 'canvas'
+  }
+});
+</script>
+{% endblock %}
