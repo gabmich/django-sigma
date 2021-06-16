@@ -20,5 +20,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sigma/<str:filename>/', include('sigma.urls')),
+    path('sigma/', include('sigma.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)
