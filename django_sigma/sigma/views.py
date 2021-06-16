@@ -4,22 +4,22 @@ from django.conf import settings
 from django.shortcuts import render
 
 
-def index(request, filename):
+def index(request, filename, first_column_name, second_column_name):
+    """
+    
+    """
     # init empty nodes and edges
     nodes, edges = [], []
 
     # load file in 'media' folder (at project root)
     file_path = os.path.join(settings.MEDIA_ROOT, filename)
     abi_df = pd.read_excel(file_path)
-    print(abi_df)
 
     mon_set_de_numeros = set()
     
     for index, row in abi_df.iterrows():
-        mon_set_de_numeros.add(str(row['calling_number']))
-        mon_set_de_numeros.add(str(row['called_number']))
-
-    print(mon_set_de_numeros)
+        mon_set_de_numeros.add(str(row[first_column_name]))
+        mon_set_de_numeros.add(str(row[second_column_name]))
 
     for i in mon_set_de_numeros:
         node = {
@@ -35,8 +35,8 @@ def index(request, filename):
     for index, row in abi_df.iterrows():
         edge = {
             "id": f"edge{random.randint(0,9999999)}",
-            "source": str(row['calling_number']),
-            "target": str(row['called_number']),
+            "source": str(row[first_column_name]),
+            "target": str(row[second_column_name]),
             "type": 'dotted'
         }
         edges.append(edge)

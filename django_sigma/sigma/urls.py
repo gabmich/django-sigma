@@ -18,5 +18,5 @@ from django.urls import path
 from .views import index
 
 urlpatterns = [
-    path('<str:filename>/', index)
+    path('<str:filename>/<str:first_column_name>/<str:second_column_name>/', index)
 ]
